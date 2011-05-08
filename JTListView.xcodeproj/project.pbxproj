@@ -14,6 +14,8 @@
 		BF60EB9B1374000700B0603C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF60EB9A1374000700B0603C /* main.m */; };
 		BF60EB9E1374000700B0603C /* JTListViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF60EB9D1374000700B0603C /* JTListViewAppDelegate.m */; };
 		BF60EBA11374000700B0603C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF60EB9F1374000700B0603C /* MainWindow.xib */; };
+		BF60EBD6137400E800B0603C /* JTListView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF60EBD5137400E800B0603C /* JTListView.m */; };
+		BFB77303137670EC00983A93 /* JTListViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB77302137670EC00983A93 /* JTListViewDemoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,13 +23,18 @@
 		BF60EB8D1374000600B0603C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF60EB8F1374000700B0603C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BF60EB911374000700B0603C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		BF60EB951374000700B0603C /* JTListView-Info.plist */ = {isa = PBXFileReference; path = "JTListView-Info.plist"; sourceTree = "<group>"; };
+		BF60EB951374000700B0603C /* JTListView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JTListView-Info.plist"; sourceTree = "<group>"; };
 		BF60EB971374000700B0603C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BF60EB991374000700B0603C /* JTListView-Prefix.pch */ = {isa = PBXFileReference; path = "JTListView-Prefix.pch"; sourceTree = "<group>"; };
+		BF60EB991374000700B0603C /* JTListView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JTListView-Prefix.pch"; sourceTree = "<group>"; };
 		BF60EB9A1374000700B0603C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BF60EB9C1374000700B0603C /* JTListViewAppDelegate.h */ = {isa = PBXFileReference; path = JTListViewAppDelegate.h; sourceTree = "<group>"; };
+		BF60EB9C1374000700B0603C /* JTListViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JTListViewAppDelegate.h; sourceTree = "<group>"; };
 		BF60EB9D1374000700B0603C /* JTListViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JTListViewAppDelegate.m; sourceTree = "<group>"; };
 		BF60EBA01374000700B0603C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		BF60EBD4137400E800B0603C /* JTListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTListView.h; sourceTree = "<group>"; };
+		BF60EBD5137400E800B0603C /* JTListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTListView.m; sourceTree = "<group>"; };
+		BFB77301137670EC00983A93 /* JTListViewDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTListViewDemoController.h; sourceTree = "<group>"; };
+		BFB77302137670EC00983A93 /* JTListViewDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTListViewDemoController.m; sourceTree = "<group>"; };
+		BFB773321376F3ED00983A93 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +83,10 @@
 			children = (
 				BF60EB9C1374000700B0603C /* JTListViewAppDelegate.h */,
 				BF60EB9D1374000700B0603C /* JTListViewAppDelegate.m */,
+				BFB77301137670EC00983A93 /* JTListViewDemoController.h */,
+				BFB77302137670EC00983A93 /* JTListViewDemoController.m */,
+				BF60EBD4137400E800B0603C /* JTListView.h */,
+				BF60EBD5137400E800B0603C /* JTListView.m */,
 				BF60EB9F1374000700B0603C /* MainWindow.xib */,
 				BF60EB941374000700B0603C /* Supporting Files */,
 			);
@@ -89,6 +100,7 @@
 				BF60EB961374000700B0603C /* InfoPlist.strings */,
 				BF60EB991374000700B0603C /* JTListView-Prefix.pch */,
 				BF60EB9A1374000700B0603C /* main.m */,
+				BFB773321376F3ED00983A93 /* .gitignore */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -119,7 +131,7 @@
 		BF60EB801374000600B0603C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "東京工科大学";
+				ORGANIZATIONNAME = "Jun Tanaka";
 			};
 			buildConfigurationList = BF60EB831374000600B0603C /* Build configuration list for PBXProject "JTListView" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -157,6 +169,8 @@
 			files = (
 				BF60EB9B1374000700B0603C /* main.m in Sources */,
 				BF60EB9E1374000700B0603C /* JTListViewAppDelegate.m in Sources */,
+				BF60EBD6137400E800B0603C /* JTListView.m in Sources */,
+				BFB77303137670EC00983A93 /* JTListViewDemoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +200,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -195,6 +210,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -203,6 +219,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -210,6 +227,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -223,7 +241,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JTListView/JTListView-Prefix.pch";
 				INFOPLIST_FILE = "JTListView/JTListView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -236,7 +256,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JTListView/JTListView-Prefix.pch";
 				INFOPLIST_FILE = "JTListView/JTListView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -261,6 +283,7 @@
 				BF60EBA61374000700B0603C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

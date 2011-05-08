@@ -3,7 +3,7 @@
 //  JTListView
 //
 //  Created by Jun on 5/6/11.
-//  Copyright 2011 東京工科大学. All rights reserved.
+//  Copyright 2011 Jun Tanaka. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
