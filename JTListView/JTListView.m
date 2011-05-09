@@ -174,6 +174,15 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         contentUpdater(itemRect);
     }];
     
+    if ([self isHorizontalLayout])
+    {
+        contentSize.width -= _gapBetweenItems;
+    }
+    else if ([self isVerticalLayout])
+    {
+        contentSize.height -= _gapBetweenItems;
+    }
+    
     self.contentSize = contentSize;
     
     [self layoutVisibleItems];
@@ -498,8 +507,6 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         self.showsVerticalScrollIndicator = NO;
         self.alwaysBounceHorizontal = YES;
         self.alwaysBounceVertical = NO;
-        self.itemWidth = 40;
-        self.itemHeight = self.frame.size.height;
     }
     else if (JTListViewLayoutIsVertical(layout))
     {
@@ -507,12 +514,11 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         self.showsVerticalScrollIndicator = YES;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
-        self.itemWidth = self.frame.size.width;
-        self.itemHeight = 40;
     }
     
     [self reloadData];
     [self scrollToItemAtIndex:indexCache atScrollPosition:JTListViewScrollPositionCenter animated:NO];
+    [self flashScrollIndicators];
 }
 
 - (void)reloadData
