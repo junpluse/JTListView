@@ -503,15 +503,15 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     
     if (JTListViewLayoutIsHorizontal(layout))
     {
-        self.showsHorizontalScrollIndicator = YES;
-        self.showsVerticalScrollIndicator = NO;
+        //self.showsHorizontalScrollIndicator = YES;
+        //self.showsVerticalScrollIndicator = NO;
         self.alwaysBounceHorizontal = YES;
         self.alwaysBounceVertical = NO;
     }
     else if (JTListViewLayoutIsVertical(layout))
     {
-        self.showsHorizontalScrollIndicator = NO;
-        self.showsVerticalScrollIndicator = YES;
+        //self.showsHorizontalScrollIndicator = NO;
+        //self.showsVerticalScrollIndicator = YES;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
     }
