@@ -28,7 +28,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)sharedInit;
 
-- (void)layoutItemRectsAtIndexes:(NSIndexSet *)indexes;
+- (void)layoutItemRects;
 - (void)layoutVisibleItems;
 - (void)loadItemAtIndex:(NSUInteger)index;
 - (void)loadItemAtIndexes:(NSIndexSet *)indexes;
@@ -128,6 +128,8 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)layoutItemRects
 {
+    NSUInteger indexCache = [self indexForItemAtCenterOfBounds];
+    
     __block CGPoint contentOffset = CGPointZero;
     __block CGSize  contentSize   = CGSizeZero;
 
@@ -185,11 +187,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     
     self.contentSize = contentSize;
     
+    [self scrollToItemAtIndex:indexCache atScrollPosition:JTListViewScrollPositionCenter animated:NO];
     [self layoutVisibleItems];
 }
 
 - (void)layoutVisibleItems
-{    
+{        
+    NSLog(@"layout");
+    
     NSIndexSet *oldVisibleIndexes = [NSIndexSet indexSetWithIndexesInRange:_visibleRange];
     NSIndexSet *newVisibleIndexes = [self indexesForItemsInRect:[self visibleRect]];
     
@@ -219,7 +224,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         UIView *view = [self viewForItemAtIndex:idx];
         CGRect itemRect = [self rectForItemAtIndex:idx];
         
-        if (!CGPointEqualToPoint(view.frame.origin, itemRect.origin))
+        if (!view.subviews || !CGPointEqualToPoint(view.frame.origin, itemRect.origin))
         {
             [UIView setAnimationsEnabled:NO];
         }
@@ -235,7 +240,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
             {
                 [self.delegate listView:self willDisplayView:view forItemAtIndex:idx];
             }
-            [self insertSubview:view atIndex:1];
+            [self insertSubview:view atIndex:1];            
         }
         
         [UIView setAnimationsEnabled:animationsEnabled];
@@ -478,7 +483,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     else
     {
         NSUInteger nextItemIndex = [self lowerItemIndex];
-        [self scrollToItemAtIndex:nextItemIndex atScrollPosition:JTListViewScrollPositionCenterElseNone animated:animated];
+        [self scrollToItemAtIndex:nextItemIndex atScrollPosition:JTListViewScrollPositionCenter animated:animated];
     }
 }
 
@@ -564,7 +569,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 }
 
 - (void)updateItemSizesAtIndexes:(NSIndexSet *)indexes
-{
+{    
     CGSize(^sizeForItemAtIndex)(NSUInteger);
     
     if ([self isHorizontalLayout])

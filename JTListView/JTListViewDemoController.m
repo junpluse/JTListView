@@ -15,6 +15,8 @@
 {
     [super viewWillAppear:animated];
     
+    //self.listView.itemWidth = 80.0;
+    //self.listView.itemHeight = 80.0;
     //self.listView.gapBetweenItems = 44.0;
     self.listView.visibleInsets = UIEdgeInsetsMake(-256, -256, -256, -256);
 }
@@ -46,7 +48,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     JTListViewLayout layout;
-    switch (buttonIndex) {
+    switch (buttonIndex)
+    {
         case 0: layout = JTListViewLayoutLeftToRight; break;
         case 1: layout = JTListViewLayoutRightToLeft; break;
         case 2: layout = JTListViewLayoutTopToBottom; break;
