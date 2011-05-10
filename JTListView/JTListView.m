@@ -192,9 +192,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 }
 
 - (void)layoutVisibleItems
-{        
-    NSLog(@"layout");
-    
+{            
     NSIndexSet *oldVisibleIndexes = [NSIndexSet indexSetWithIndexesInRange:_visibleRange];
     NSIndexSet *newVisibleIndexes = [self indexesForItemsInRect:[self visibleRect]];
     
@@ -508,15 +506,11 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     
     if (JTListViewLayoutIsHorizontal(layout))
     {
-        //self.showsHorizontalScrollIndicator = YES;
-        //self.showsVerticalScrollIndicator = NO;
         self.alwaysBounceHorizontal = YES;
         self.alwaysBounceVertical = NO;
     }
     else if (JTListViewLayoutIsVertical(layout))
     {
-        //self.showsHorizontalScrollIndicator = NO;
-        //self.showsVerticalScrollIndicator = YES;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
     }
@@ -671,11 +665,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         return nil;
     }
     
-    NSRange searchRange = NSMakeRange(0, [self numberOfItems]);
+    CGRect firstItemRect = [self rectForItemAtIndex:0];
+    
+    NSUInteger minIndex = 0;
+    NSUInteger maxIndex = [self numberOfItems] - 1;
     
     while (YES)
     {
-        NSUInteger centerIndex = searchRange.location + searchRange.length / 2;
+        NSUInteger centerIndex = minIndex + (maxIndex - minIndex) / 2;
         CGRect centerItemRect = [self rectForItemAtIndex:centerIndex];
         
         if (CGRectIntersectsRect(centerItemRect, rect))
@@ -683,20 +680,12 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
             NSUInteger firstIndex = centerIndex;
             NSUInteger lastIndex = centerIndex;
             
-            while (CGRectIntersectsRect([self rectForItemAtIndex:firstIndex - 1], rect))
+            while (firstIndex > 0 && CGRectIntersectsRect([self rectForItemAtIndex:firstIndex - 1], rect))
             {
-                if (firstIndex == 0)
-                {
-                    break;
-                }
                 firstIndex --;
             }
-            while (CGRectIntersectsRect([self rectForItemAtIndex:lastIndex + 1], rect))
+            while (lastIndex < [self numberOfItems] - 1 && CGRectIntersectsRect([self rectForItemAtIndex:lastIndex + 1], rect))
             {
-                if (lastIndex == [self numberOfItems] - 1)
-                {
-                    break;
-                }
                 lastIndex ++;
             }
             
@@ -704,20 +693,24 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
             NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:indexRange];
             return indexes;
         }
-        else if (searchRange.length == 1)
+        else if (minIndex == maxIndex)
         {
             return nil;
         }
         else
         {
-            CGRect firstItemRect  = [self rectForItemAtIndex:searchRange.location];
             if (!CGRectIntersectsRect(CGRectUnion(firstItemRect, centerItemRect), rect))
             {
-                searchRange.location = centerIndex + 1;
+                minIndex = centerIndex + 1;
             }
-            searchRange.length /= 2;
+            else
+            {
+                maxIndex = centerIndex - 1;
+            }
         }
     }
+    
+    return nil;
 }
 
 - (CGRect)visibleRect

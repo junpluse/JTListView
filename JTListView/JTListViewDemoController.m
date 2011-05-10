@@ -18,7 +18,7 @@
     //self.listView.itemWidth = 80.0;
     //self.listView.itemHeight = 80.0;
     //self.listView.gapBetweenItems = 44.0;
-    self.listView.visibleInsets = UIEdgeInsetsMake(-256, -256, -256, -256);
+    //self.listView.visibleInsets = UIEdgeInsetsMake(-256, -256, -256, -256);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
