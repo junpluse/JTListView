@@ -60,6 +60,10 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)dealloc
 {
+    [self removeObserver:self forKeyPath:@"itemWidth"];
+    [self removeObserver:self forKeyPath:@"itemHeight"];
+    [self removeObserver:self forKeyPath:@"gapBetweenItems"];
+    
     [_itemRects release],      _itemRects      = nil;
     [_visibleViews release],   _visibleViews   = nil;
     [_reuseableViews release], _reuseableViews = nil;
