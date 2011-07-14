@@ -233,8 +233,6 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     NSIndexSet *oldVisibleIndexes = [NSIndexSet indexSetWithIndexesInRange:_visibleRange];
     NSIndexSet *newVisibleIndexes = [self indexesForItemsInRect:[self visibleRect]];
     
-    NSLog(@"%@, %@", oldVisibleIndexes, newVisibleIndexes);
-    
     if (![oldVisibleIndexes isEqualToIndexSet:newVisibleIndexes])
     {
         NSIndexSet *indexesForRecycle = [oldVisibleIndexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL *stop)
