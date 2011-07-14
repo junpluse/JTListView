@@ -133,6 +133,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 - (void)layoutItemRects
 {
     NSUInteger indexCache = [self indexForItemAtCenterOfBounds];
+    if (indexCache == NSNotFound) indexCache = 0;
     
     __block CGPoint contentOffset = CGPointZero;
     __block CGSize  contentSize   = CGSizeZero;
