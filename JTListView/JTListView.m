@@ -184,10 +184,42 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     if ([self isHorizontalLayout])
     {
         contentSize.width -= _gapBetweenItems;
+        
+        if (contentSize.width < self.frame.size.width)
+        {
+            CGFloat gap = self.frame.size.width - contentSize.width;
+            contentSize.width = self.frame.size.width;
+            
+            if (_layout == JTListViewLayoutRightToLeft)
+            {
+                [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
+                {
+                    CGRect itemRect = [[_itemRects objectAtIndex:idx] CGRectValue];
+                    itemRect.origin.x += gap;
+                    [_itemRects replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:itemRect]];
+                }];
+            }
+        }
     }
     else if ([self isVerticalLayout])
     {
         contentSize.height -= _gapBetweenItems;
+        
+        if (contentSize.height < self.frame.size.height)
+        {
+            CGFloat gap = self.frame.size.height - contentSize.height;
+            contentSize.height = self.frame.size.height;
+            
+            if (_layout == JTListViewLayoutBottomToTop)
+            {
+                [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
+                {
+                    CGRect itemRect = [[_itemRects objectAtIndex:idx] CGRectValue];
+                    itemRect.origin.y += gap;
+                    [_itemRects replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:itemRect]];
+                }];
+            }
+        }
     }
     
     self.contentSize = contentSize;
@@ -201,6 +233,8 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     NSIndexSet *oldVisibleIndexes = [NSIndexSet indexSetWithIndexesInRange:_visibleRange];
     NSIndexSet *newVisibleIndexes = [self indexesForItemsInRect:[self visibleRect]];
     
+    NSLog(@"%@, %@", oldVisibleIndexes, newVisibleIndexes);
+    
     if (![oldVisibleIndexes isEqualToIndexSet:newVisibleIndexes])
     {
         NSIndexSet *indexesForRecycle = [oldVisibleIndexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL *stop)
@@ -211,7 +245,7 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         
         NSUInteger firstIndex = [newVisibleIndexes firstIndex];
         NSUInteger lastIndex = [newVisibleIndexes lastIndex];
-        _visibleRange = NSMakeRange(firstIndex, lastIndex - firstIndex + 1);
+        _visibleRange = (!newVisibleIndexes) ? NSMakeRange(0, 0) : NSMakeRange(firstIndex, lastIndex - firstIndex + 1);
         
         NSIndexSet *indexesForLoad = [newVisibleIndexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL *stop)
         {
@@ -863,6 +897,11 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     [super layoutSubviews];
     
     static CGSize frameSizeCache = {0.0, 0.0};
+    
+    if (CGSizeEqualToSize(frameSizeCache, CGSizeZero))
+    {
+        frameSizeCache = self.frame.size;
+    }
     
     if (!CGSizeEqualToSize(self.frame.size, frameSizeCache))
     {
