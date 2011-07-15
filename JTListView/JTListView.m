@@ -132,9 +132,6 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)layoutItemRects
 {
-    NSUInteger indexCache = [self indexForItemAtCenterOfBounds];
-    if (indexCache == NSNotFound) indexCache = 0;
-    
     __block CGPoint contentOffset = CGPointZero;
     __block CGSize  contentSize   = CGSizeZero;
 
@@ -224,7 +221,6 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
     
     self.contentSize = contentSize;
     
-    [self scrollToItemAtIndex:indexCache atScrollPosition:JTListViewScrollPositionCenter animated:NO];
     [self layoutVisibleItems];
 }
 
@@ -416,9 +412,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)goLeft:(BOOL)animated;
 {    
-    CGPoint contentOffset;
-
     NSUInteger currentItemIndex = [self indexForItemAtCenterOfBounds];
+    
+    if (currentItemIndex == NSNotFound)
+    {
+        return;
+    }
+    
+    CGPoint contentOffset;
     CGRect currentItemRect = [self rectForItemAtIndex:currentItemIndex];
     CGFloat currentItemMinX = CGRectGetMinX(currentItemRect);
     
@@ -443,9 +444,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)goRight:(BOOL)animated;
 {
-    CGPoint contentOffset;
-    
     NSUInteger currentItemIndex = [self indexForItemAtCenterOfBounds];
+    
+    if (currentItemIndex == NSNotFound)
+    {
+        return;
+    }
+    
+    CGPoint contentOffset;
     CGRect currentItemRect = [self rectForItemAtIndex:currentItemIndex];
     CGFloat currentItemMaxX = CGRectGetMaxX(currentItemRect);
     
@@ -470,9 +476,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)goUp:(BOOL)animated;
 {
-    CGPoint contentOffset;
-    
     NSUInteger currentItemIndex = [self indexForItemAtCenterOfBounds];
+    
+    if (currentItemIndex == NSNotFound)
+    {
+        return;
+    }
+    
+    CGPoint contentOffset;
     CGRect currentItemRect = [self rectForItemAtIndex:currentItemIndex];
     CGFloat currentItemMinY = CGRectGetMinY(currentItemRect);
     
@@ -497,9 +508,14 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 
 - (void)goDown:(BOOL)animated;
 {
-    CGPoint contentOffset;
-    
     NSUInteger currentItemIndex = [self indexForItemAtCenterOfBounds];
+    
+    if (currentItemIndex == NSNotFound)
+    {
+        return;
+    }
+    
+    CGPoint contentOffset;
     CGRect currentItemRect = [self rectForItemAtIndex:currentItemIndex];
     CGFloat currentItemMaxY = CGRectGetMaxY(currentItemRect);
     
@@ -539,6 +555,15 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
 {
     NSUInteger indexCache = [self indexForItemAtCenterOfBounds];
     
+    if (indexCache == NSNotFound || CGRectContainsRect(self.bounds, [self rectForItemAtIndex:0]))
+    {
+        indexCache = 0;
+    }
+    else if (CGRectContainsRect(self.bounds, [self rectForItemAtIndex:[self numberOfItems] - 1]))
+    {
+        indexCache = [self numberOfItems] - 1;
+    }
+        
     _layout = layout;
     
     if (JTListViewLayoutIsHorizontal(layout))
@@ -783,7 +808,8 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         }
         else if ([self isHorizontalLayout])
         {
-            if ((itemRect.size.width < self.bounds.size.width && CGRectGetMidX(itemRect) < CGRectGetMidX(self.bounds)) ||
+            if (itemRect.size.width == self.bounds.size.width || 
+                (itemRect.size.width < self.bounds.size.width && CGRectGetMidX(itemRect) < CGRectGetMidX(self.bounds)) ||
                 (itemRect.size.width > self.bounds.size.width && CGRectGetMidX(itemRect) > CGRectGetMidX(self.bounds)))
             {
                 offset = CGPointMake(CGRectGetMinX(itemRect), self.contentOffset.y);
@@ -798,7 +824,8 @@ BOOL JTListViewLayoutIsVertical(JTListViewLayout layout)
         }
         else if ([self isVerticalLayout])
         {
-            if ((itemRect.size.height < self.bounds.size.height && CGRectGetMidY(itemRect) < CGRectGetMidY(self.bounds)) ||
+            if (itemRect.size.height == self.bounds.size.height ||
+                (itemRect.size.height < self.bounds.size.height && CGRectGetMidY(itemRect) < CGRectGetMidY(self.bounds)) ||
                 (itemRect.size.height > self.bounds.size.height && CGRectGetMidY(itemRect) > CGRectGetMidY(self.bounds)))
             {
                 offset = CGPointMake(self.contentOffset.x, CGRectGetMinY(itemRect));
